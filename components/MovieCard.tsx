@@ -2,17 +2,16 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Link} from "expo-router";
 import {icons} from "@/constants/icons";
 
-const MovieCard = ({id, poster_path, title, vote_average, release_date}: Movie) => {
-    console.log(poster_path)
+const MovieCard = ({id, poster_path, title, vote_average, release_date, adult}: Movie) => {
     return (
-        <Link href={`/movies/${id}`} asChild>
+        <Link href={`/movie/${id}`} asChild>
             <TouchableOpacity className='w-[30%]'>
                <Image
                    source={{
                        uri: poster_path
                         ? `https://image.tmdb.org/t/p/w500${poster_path}`
                         :
-                        'https://placehold.co/600x400/1a1a1a/ffffff.png'
+                        'https://m.media-amazon.com/images/I/61s8vyZLSzL._AC_UF894,1000_QL80_.jpg'
             }}
                 className="w-full h-52 rounded-lg"
                 resizeMode="cover"
@@ -29,9 +28,9 @@ const MovieCard = ({id, poster_path, title, vote_average, release_date}: Movie) 
                     <Text className="text-xs text-light-300 font-medium mt-1">
                         {release_date?.split('-')[0]}
                     </Text>
-                    {/*<Text className="text-xs font-medium text-light-300 uppercase">*/}
-                    {/*    Movie*/}
-                    {/*</Text>*/}
+                    {adult
+                        ? <Text style={{marginTop: -60}} className="text-l font-bold text-red-600 flex-wrap uppercase">18+</Text>
+                        : null}
 
                 </View>
 
